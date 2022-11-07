@@ -1,0 +1,21 @@
+<p>favorite works!</p>
+<div *ngFor="let country of displayFavoriteCountries" class="card country">
+    <img [src]="country.flag" alt="flag" class="card-img-top" />
+    <div class="card-body">
+        <h4 class="card-title"><strong>{{country.alpha3Code}}</strong> {{country.name}}</h4>
+        <p class="card-text"><b>Capital:</b> {{country.capital}}</p>
+        <ul class="list-group list-group-flush">
+            <li><b>How many languages: </b> {{country.languages.length}}</li>
+            <li><b>Lanaguge:</b>
+                <div *ngFor="let language of country.languages">
+                    {{language.name}}</div>
+            </li>
+            <li><b>Currency:</b>
+                <div *ngFor="let currency of country.currencies">
+                    {{currency.name}}</div>
+            </li>
+            <li class="list-group-item"><b>Population:</b> {{country.population}}</li>
+            <li class="list-group-item"><b>Region:</b> {{country.subregion}}</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" [routerLink]="'/'">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'/favorite'">Favorites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'/learn-more'">Learn more</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search">
+        <form (submit)="onSubmit()">
+            <p>Search by country name</p>
+
+            <input type="text" placeholder="search by country..." name="country" [(ngModel)]="countryName">
+        </form><br>
+
+        <form (submit)="submitByLang()">
+            <p>Search by language abbreviation</p>
+            <input type="text" placeholder="search by language..." name="language" [(ngModel)]="language">
+        </form><br>
+
+        <form (submit)="submitByCurrency()">
+            <p>Search by currency abbreviation</p>
+            <input type="text" placeholder="search by language..." name="language" [(ngModel)]="currencyOfCountry">
+        </form>
+
+    </div>
+
+    <div class="countries-flag">
+
+        <div *ngFor="let country of flags" class="card country">
+            <img [src]="country.flag" alt="flag" class="card-img-top" />
+            <div class="card-body">
+                <h4 class="card-title"><strong>{{country.alpha3Code}}</strong> {{country.name}}</h4>
+                <p class="card-text"><b>Capital:</b> {{country.capital}}</p>
+                <ul class="list-group list-group-flush">
+                    <li><b>Lanaguge:</b>
+                        <div *ngFor="let language of country.languages">
+                            {{language.name}}</div>
+                    </li>
+                    <li><b>Currency:</b>
+                        <div *ngFor="let currency of country.currencies">
+                            {{currency.name}}</div>
+                    </li>
+                    <li class="list-group-item"><b>Region:</b> {{country.subregion}}</li>
+                    <button [routerLink]="'/favorite'" (click)="sendToFavorite(country)">
+                        Add to favorites</button>
+                    <button [routerLink]="'/learn-more'" (click)="learnMore(country)">Learn More</button>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
